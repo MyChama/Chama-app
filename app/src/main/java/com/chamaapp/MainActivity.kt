@@ -29,18 +29,22 @@ import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontSynthesis.Companion.Style
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chamaapp.ui.theme.ChamaAppTheme
 import com.chamaapp.ui.theme.LightRed
+import com.chamaapp.ui.theme.RockPink
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
 
             ChamaAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -48,9 +52,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
 
-                ) {Boxes()
+                ) {
                     Greeting("Rachel")
 
+                    Space()
                     Box() {
                         Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
                         tint = Color.White, modifier = Modifier
@@ -79,7 +84,43 @@ class MainActivity : ComponentActivity() {
                                  )
 
 
+
                          }
+                        Box(contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(10.dp))
+                                .padding(start = 200.dp, top = 290.dp)
+                                .width(160.dp)
+                                .height(140.dp)
+                                .background(color = RockPink)
+                                .size(50.dp))
+                        {
+                            Text(
+                                text = "Loans",
+                                style = (TextStyle(
+                                    fontWeight = FontWeight.Bold, fontSize = 20.sp,
+
+                                    )))
+
+                        }
+                        Box(contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(10.dp))
+                                .padding(start = 200.dp, top = 450.dp)
+                                .width(160.dp)
+                                .height(140.dp)
+                                .background(color = RockPink)
+                                .size(50.dp)) {
+                            Text(
+                                text = "Fines",
+                                style = (TextStyle(
+                                    fontWeight = FontWeight.Bold, fontSize = 20.sp,
+
+                                    )))
+
+
+                        }
+
                     }
                 }
             }
@@ -92,8 +133,9 @@ class MainActivity : ComponentActivity() {
 
 
             modifier = Modifier
-                .fillMaxSize()
+
                 .fillMaxWidth(1f)
+
 
 
         )
@@ -101,6 +143,7 @@ class MainActivity : ComponentActivity() {
         {
 
             Column(
+
 
                 modifier = Modifier
                     .background(Color.Black)
@@ -110,6 +153,9 @@ class MainActivity : ComponentActivity() {
 
 
                 ) {
+
+
+
                 Text(
                     modifier = Modifier.padding(start = 150.dp),
                     text = "Hi $name!",
@@ -173,39 +219,63 @@ class MainActivity : ComponentActivity() {
 
     }
 @Composable
-fun Boxes(
-color: Color = LightRed
+fun Space(color:Color= RockPink
 ){
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+    Column(
+        verticalArrangement = Arrangement.Center,
+        //horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .padding(horizontal = 15.dp, vertical = 5.dp)
+            .fillMaxWidth(1f)
+            .clip(RoundedCornerShape(40.dp))
 
-            .clip(RoundedCornerShape(15.dp))
-            .background(color)
-            .padding(horizontal = 20.dp, vertical = 17.dp)
+    ) {
 
-
-    )
-    {
-        Column(
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
-                .padding(vertical = 30.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .padding(start = 10.dp, top = 122.dp)
+                .width(160.dp)
+                .height(140.dp)
+                .background(color = RockPink)
+                .size(50.dp)
+
+        
+        ) {
+            Text(text = "Projects",
+                style = (TextStyle(fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+
+                        )))
+
+
+            
+        }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .clip(RoundedCornerShape(20.dp))
+                .padding(start = 10.dp, top = 20.dp)
+                .width(160.dp)
+                .height(140.dp)
+                .background(color = RockPink)
+                .size(50.dp)
+
+
 
         ) {
+            Text(
+                text = "Shares",
+                style = (TextStyle(
+                    fontWeight = FontWeight.Bold, fontSize = 20.sp,
+
+
+                    ))
+            )
 
         }
-    }
+
+
+        }
 }
-
-
-
-
-
-
-
-
-
-
-
-
