@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chamaapp.ui.theme.*
+import kotlin.math.E
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -201,7 +202,7 @@ Column (
                 .padding(bottom = 30.dp, end = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = LightOrange, shape = RoundedCornerShape(10.dp))
+                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
 
 
@@ -217,8 +218,8 @@ Column (
             )
             androidx.compose.material.Icon(painter =
             painterResource(id = R.drawable.loans), contentDescription ="loans",
-
-                modifier =Modifier
+                tint = EndBlue,
+                modifier = Modifier
 
                     .size(170.dp)
                     .padding(start = 118.dp, bottom = 115.dp))
@@ -232,7 +233,7 @@ Column (
                 .padding(bottom = 150.dp, end = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = LightOrange, shape = RoundedCornerShape(10.dp))
+                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
         ) {
             Text(
@@ -245,8 +246,9 @@ Column (
             )
             androidx.compose.material.Icon(painter =
             painterResource(id = R.drawable.money), contentDescription ="fines",
+                tint = EndBlue,
 
-                modifier =Modifier
+                modifier = Modifier
 
                     .size(148.dp)
                     .padding(start = 130.dp, bottom = 110.dp))
@@ -269,7 +271,7 @@ Column (
                 .padding(bottom = 30.dp, start = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = LightOrange, shape = RoundedCornerShape(10.dp))
+                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
         )
         {
@@ -283,8 +285,9 @@ Column (
             )
             androidx.compose.material.Icon(painter =
             painterResource(id = R.drawable.kazi), contentDescription ="Projects",
+                tint = EndBlue,
 
-                modifier =Modifier
+                modifier = Modifier
                     .size(136.dp)
                     .padding(start = 120.dp, bottom = 108.dp))
 
@@ -296,7 +299,7 @@ Column (
                 .padding(bottom = 150.dp, start = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = LightOrange, shape = RoundedCornerShape(10.dp))
+                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
         ) {
             Text(
@@ -311,15 +314,17 @@ Column (
             )
             androidx.compose.material.Icon(painter =
             painterResource(id = R.drawable.group), contentDescription ="loans",
-
-                modifier =Modifier
+                tint = EndBlue,
+                modifier = Modifier
                     .size(134.dp)
-                .padding(start = 115.dp, bottom = 110.dp)
+                    .padding(start = 115.dp, bottom = 110.dp),
+
 
 
             )
 
         }
+
 
     }
 }
