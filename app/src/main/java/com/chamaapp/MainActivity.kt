@@ -1,52 +1,34 @@
 package com.chamaapp
 
-import android.graphics.ColorFilter
-import android.graphics.Paint
-import android.graphics.drawable.Icon
-import android.graphics.drawable.PaintDrawable
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Button
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontSynthesis.Companion.Style
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chamaapp.ui.theme.*
-import kotlin.math.E
 
 class MainActivity : ComponentActivity() {
+
+    @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-
             ChamaAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -54,14 +36,11 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
 
                 ) {
-                    HomeScreen()
                     LowerPart()
-
-
                     Greeting("Rachel")
 
 
-                    Box() {
+                    Box {
                         Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
                         tint = Color.White, modifier = Modifier
                                 .padding(20.dp))
@@ -76,7 +55,8 @@ class MainActivity : ComponentActivity() {
                      )
 
                     }
-                    LowerPart()
+                    MiddleText()
+                    BottomNav()
                 }
             }
         }
@@ -96,7 +76,7 @@ class MainActivity : ComponentActivity() {
                     .background(color = EndBlue)
                     .padding(top = 20.dp)
                     .fillMaxWidth(1f)
-                    .fillMaxHeight(0.35f),
+                    .fillMaxHeight(0.31f),
 
                 ) {
 
@@ -111,6 +91,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                 )
+                Spacer(modifier = Modifier.height(30.dp))
                 Text(
                     modifier = Modifier
                         .padding(vertical = 10.dp, horizontal = 15.dp),
@@ -127,7 +108,7 @@ class MainActivity : ComponentActivity() {
                     style = TextStyle(
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp,
+                        fontSize = 30.sp,
                         textAlign = TextAlign.Justify,
                     )
 
@@ -136,9 +117,7 @@ class MainActivity : ComponentActivity() {
             }
 
         }
-
-
-
+Spacer(modifier = Modifier.height(15.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -146,10 +125,10 @@ class MainActivity : ComponentActivity() {
         horizontalArrangement = Arrangement.SpaceAround
         )
         {
-            androidx.compose.material.Button(
+            Button(
                 onClick = { /*TODO*/ },
                 modifier = Modifier
-                    .padding(top = 150.dp)
+                    .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
 
             )
@@ -164,9 +143,9 @@ class MainActivity : ComponentActivity() {
                     )
                 )
             }
-            androidx.compose.material.Button(onClick = { /*TODO*/ },
+            Button(onClick = { /*TODO*/ },
                 modifier = Modifier
-                    .padding(top = 150.dp)
+                    .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
 
             )
@@ -187,106 +166,17 @@ class MainActivity : ComponentActivity() {
     }
 
     }
-@Composable
-fun HomeScreen(){
-Column(
-
-
-
-) {
-    BottomMenu(items= listOf(
-        BottomMenuContent("Home", R.drawable.homee),
-        BottomMenuContent("Date", R.drawable.nchama),
-        BottomMenuContent("Profile", R.drawable.group),
-        BottomMenuContent("Explore", R.drawable.money),
-        BottomMenuContent("Save", R.drawable.projects)
-
-    ))
-}
-
-
-}
-
 
 
 @Composable
-fun BottomMenu(
-    items: List<BottomMenuContent>,
-    modifier: Modifier = Modifier,
-    activeHighlightColor:Color = EndBlue,
-    activeTextColor: Color = LightOrange,
-    inactiveTextColor : Color = Color.White,
-    initialSelectedItemIndex: Int = 0
-
-){
-    var selectedItemIndex by remember{
-        mutableStateOf(initialSelectedItemIndex)
+fun MiddleText(){
+    Row(modifier = Modifier.padding(vertical = 260.dp, horizontal = 15.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    )
+    {
+        Text(text = "Activities")
+        Text(text = "+  Add New")
     }
-    Row(
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(EndBlue)
-            .padding(15.dp)
-    ) {
-        items.forEachIndexed { index, item->
-            BottomMenuItem(
-                item= item,
-                isSelected = index == selectedItemIndex,
-                activeHighlightColor = activeHighlightColor,
-                activeTextColor = activeTextColor,
-                inactiveTextColor = inactiveTextColor
-
-            )
-            {
-                selectedItemIndex = index
-            }
-
-        }
-    }
-
-}
-
-@Composable
-fun BottomMenuItem(
-    item: BottomMenuContent,
-    isSelected: Boolean = false,
-    activeHighlightColor:Color = NewBackGround,
-    activeTextColor: Color = LightBlue,
-    inactiveTextColor : Color = LightBlue,
-    onItemClick: () -> Unit
-){
-    Column (
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.
-        clickable {
-            onItemClick()
-        }
-    ) {
-        Box(
-            contentAlignment =Alignment.Center,
-            modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
-                .background(if (isSelected) activeHighlightColor else Color.Transparent)
-                .padding(10.dp)
-
-        ) {
-            Icon(
-                painter = painterResource(id = item.iconId),
-                contentDescription = item.title,
-                tint = if(isSelected) activeTextColor else inactiveTextColor,
-                modifier = Modifier.size(20.dp)
-
-            )
-        }
-        Text(
-            text= item.title,
-            color = if(isSelected) activeTextColor else inactiveTextColor
-        )
-    }
-
 }
 
 @Composable
@@ -319,7 +209,7 @@ Column (
 
                     ))
             )
-            androidx.compose.material.Icon(painter =
+            Icon(painter =
             painterResource(id = R.drawable.loans), contentDescription ="loans",
                 tint = EndBlue,
                 modifier = Modifier
@@ -347,7 +237,7 @@ Column (
 
                     ))
             )
-            androidx.compose.material.Icon(painter =
+            Icon(painter =
             painterResource(id = R.drawable.money), contentDescription ="fines",
                 tint = EndBlue,
 
@@ -386,7 +276,7 @@ Column (
 
                     ))
             )
-            androidx.compose.material.Icon(painter =
+            Icon(painter =
             painterResource(id = R.drawable.kazi), contentDescription ="Projects",
                 tint = EndBlue,
 
@@ -415,19 +305,32 @@ Column (
 
                     ))
             )
-            androidx.compose.material.Icon(painter =
+            Icon(painter =
             painterResource(id = R.drawable.group), contentDescription ="loans",
                 tint = EndBlue,
                 modifier = Modifier
                     .size(134.dp)
                     .padding(start = 115.dp, bottom = 110.dp),
 
-
-
             )
 
         }
 
-
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun BottomNav(
+     drawerState: BottomDrawerState = rememberBottomDrawerState(BottomDrawerValue.Closed)
+){
+
+    BottomDrawer(
+        drawerState = drawerState,
+    drawerContent = {
+        Text(text ="Transaction History" )
+    }
+    )
+    {}
+
 }
