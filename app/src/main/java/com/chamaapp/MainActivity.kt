@@ -25,7 +25,6 @@ import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
 
-    @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,7 +55,7 @@ class MainActivity : ComponentActivity() {
 
                     }
                     MiddleText()
-                    BottomNav()
+
                 }
             }
         }
@@ -319,18 +318,4 @@ Column (
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun BottomNav(
-     drawerState: BottomDrawerState = rememberBottomDrawerState(BottomDrawerValue.Closed)
-){
 
-    BottomDrawer(
-        drawerState = drawerState,
-    drawerContent = {
-        Text(text ="Transaction History" )
-    }
-    )
-    {}
-
-}
