@@ -283,7 +283,7 @@ fun LowerPart() {
                 .width(160.dp)
                 .height(140.dp)
                 .background(color = Taqo, shape = RoundedCornerShape(10.dp))
-                .size(50.dp)
+                .size(49.dp)
 
 
         )
