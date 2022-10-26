@@ -10,11 +10,12 @@
     <color name="Nude_300">#FFF2D2BD</color>
     <color name="LightRed">#FFff4d4d</color>
     <color name="NewBackGround">#FFF8EFBA</color>
-    <color name="EndBlue">#FF182C61</color>
+    <color name="EndBlue">#FF202334</color>
     <color name="RockPink">#FFffcccc</color>
     <color name="LightBlue">#FF9abfe3</color>
     <color name="LightMaroon">#FFFA5C65</color>
     <color name="LightGreen">#FF37DC94</color>
     <color name ="LightOrange">#FFEC8C32</color>
     <color name="Maroon">#FFA6446C</color>
+    <color name="Taqo">#FFd1e4e1</color>
 </resources>

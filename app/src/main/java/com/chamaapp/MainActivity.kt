@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -25,6 +26,7 @@ import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
 
+    @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,27 +37,23 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
 
                 ) {
-                    LowerPart()
+                   BottomNav()
                     Greeting("Rachel")
-
 
                     Box {
                         Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
-                        tint = Color.White, modifier = Modifier
+                            tint = EndBlue, modifier = Modifier
                                 .padding(20.dp))
 
-                     Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
-                         modifier = Modifier
-                             .padding(start = 320.dp, top = 20.dp)
-                             .size(30.dp),
-                         colorFilter = androidx.compose.ui.graphics.ColorFilter
-                             .tint(color = Color.White)
-
-                     )
+                        Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
+                            modifier = Modifier
+                                .padding(start = 320.dp, top = 20.dp)
+                                .size(30.dp),
+                            colorFilter = ColorFilter
+                                .tint(color = EndBlue)
+                        )
 
                     }
-                    MiddleText()
-
                 }
             }
         }
@@ -72,7 +70,7 @@ class MainActivity : ComponentActivity() {
             Column(
 
                 modifier = Modifier
-                    .background(color = EndBlue)
+                    .background(color = Taqo)
                     .padding(top = 20.dp)
                     .fillMaxWidth(1f)
                     .fillMaxHeight(0.31f),
@@ -84,7 +82,7 @@ class MainActivity : ComponentActivity() {
                     text = "Hi $name!",
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
-                        color = Color.White,
+                        color = EndBlue,
                         fontSize = 20.sp,
                         fontStyle = FontStyle.Italic,
                     )
@@ -96,7 +94,7 @@ class MainActivity : ComponentActivity() {
                         .padding(vertical = 10.dp, horizontal = 15.dp),
                     text = "Your balance (Ksh)",
                     style = TextStyle(
-                        color = Color.White,
+                        color = EndBlue,
                     )
 
                 )
@@ -105,7 +103,7 @@ class MainActivity : ComponentActivity() {
                         .padding(horizontal = 15.dp),
                     text = "Ksh 53,950",
                     style = TextStyle(
-                        color = Color.White,
+                        color = EndBlue,
                         fontWeight = FontWeight.Bold,
                         fontSize = 30.sp,
                         textAlign = TextAlign.Justify,
@@ -135,7 +133,7 @@ Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     text = "Transfer Money",
                     style = TextStyle(
-                        color = EndBlue,
+                        color = Color.White,
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.Bold,
                         fontSize = (18.sp)
@@ -153,7 +151,7 @@ Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     text = "Contribute",
                     style = TextStyle(
-                        color = EndBlue,
+                        color = Color.White,
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.Bold,
                         fontSize = (18.sp)
@@ -169,24 +167,44 @@ Spacer(modifier = Modifier.height(15.dp))
 
 @Composable
 fun MiddleText(){
-    Row(modifier = Modifier.padding(vertical = 260.dp, horizontal = 15.dp),
+    Row(modifier = Modifier
+        .padding(vertical = 260.dp, horizontal = 15.dp)
+        .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
     )
     {
-        Text(text = "Activities")
-        Text(text = "+  Add New")
+        Text(text = "Activities",
+            style = (TextStyle(
+                color = EndBlue,)))
+        Text(text = "+  Add New",
+            style = (TextStyle(
+                color = EndBlue,)))
+    }
+
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(.85f),
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.Center)
+
+    {
+        Image(painter = painterResource(id = R.drawable.arrowup), contentDescription = "scroll up",
+            modifier= Modifier.size(15.dp), colorFilter = ColorFilter.tint(EndBlue))
     }
 }
 
+
 @Composable
 fun LowerPart() {
-Column (
-    modifier = Modifier.fillMaxSize()
-    ,
-    verticalArrangement = Arrangement.Bottom,
-    horizontalAlignment = Alignment.End
+    Column(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.End
 
-        ) {
+    ) {
 
         Box(
             contentAlignment = Alignment.Center,
@@ -194,9 +212,8 @@ Column (
                 .padding(bottom = 30.dp, end = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
+                .background(color = Taqo, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
-
 
         )
         {
@@ -208,24 +225,26 @@ Column (
 
                     ))
             )
-            Icon(painter =
-            painterResource(id = R.drawable.loans), contentDescription ="loans",
+            Icon(
+                painter =
+                painterResource(id = R.drawable.loans), contentDescription = "loans",
                 tint = EndBlue,
                 modifier = Modifier
 
                     .size(170.dp)
-                    .padding(start = 118.dp, bottom = 115.dp))
+                    .padding(start = 118.dp, bottom = 115.dp)
+            )
 
 
         }
-      //  Spacer(modifier = Modifier.height(30.dp))
+        //  Spacer(modifier = Modifier.height(30.dp))
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .padding(bottom = 150.dp, end = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
+                .background(color = Taqo, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
         ) {
             Text(
@@ -236,22 +255,22 @@ Column (
 
                     ))
             )
-            Icon(painter =
-            painterResource(id = R.drawable.money), contentDescription ="fines",
+            Icon(
+                painter =
+                painterResource(id = R.drawable.money), contentDescription = "fines",
                 tint = EndBlue,
 
                 modifier = Modifier
 
                     .size(148.dp)
-                    .padding(start = 130.dp, bottom = 110.dp))
-
+                    .padding(start = 130.dp, bottom = 110.dp)
+            )
 
 
         }
     }
-    Column (
-        modifier = Modifier.fillMaxSize()
-        ,
+    Column(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start
 
@@ -263,8 +282,10 @@ Column (
                 .padding(bottom = 30.dp, start = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
+                .background(color = Taqo, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
+
+
         )
         {
             Text(
@@ -275,23 +296,25 @@ Column (
 
                     ))
             )
-            Icon(painter =
-            painterResource(id = R.drawable.kazi), contentDescription ="Projects",
+            Icon(
+                painter =
+                painterResource(id = R.drawable.kazi), contentDescription = "Projects",
                 tint = EndBlue,
 
                 modifier = Modifier
                     .size(136.dp)
-                    .padding(start = 120.dp, bottom = 108.dp))
+                    .padding(start = 120.dp, bottom = 108.dp)
+            )
 
         }
-     //   Spacer(modifier = Modifier.height(20.dp))
+        //   Spacer(modifier = Modifier.height(20.dp))
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .padding(bottom = 150.dp, start = 16.dp)
                 .width(160.dp)
                 .height(140.dp)
-                .background(color = Nude300, shape = RoundedCornerShape(10.dp))
+                .background(color = Taqo, shape = RoundedCornerShape(10.dp))
                 .size(50.dp)
         ) {
             Text(
@@ -304,18 +327,64 @@ Column (
 
                     ))
             )
-            Icon(painter =
-            painterResource(id = R.drawable.group), contentDescription ="loans",
+            Icon(
+                painter =
+                painterResource(id = R.drawable.group),
+                contentDescription = "loans",
                 tint = EndBlue,
                 modifier = Modifier
                     .size(134.dp)
                     .padding(start = 115.dp, bottom = 110.dp),
 
-            )
+                )
 
         }
 
     }
 }
 
+
+@ExperimentalMaterialApi
+@Composable
+    fun BottomNav() {
+        val bottomSheet = rememberBottomSheetState(BottomSheetValue.Collapsed)
+
+        BottomSheetScaffold(
+            sheetContent = {
+                Column(
+                    //horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .background(
+                            Taqo,
+                            shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
+                        )
+                        .fillMaxHeight(0.62f)
+                        .fillMaxWidth()
+                ) {
+                    Text(modifier = Modifier.padding(start = 145.dp, top = 10.dp),
+                        text = "Transactions",
+                        style = (TextStyle(
+                            color = EndBlue,
+                            fontSize = 17.sp,
+
+                                )  ))
+                    Text(modifier = Modifier.padding(start = 10.dp, top = 10.dp),
+
+                        text ="Withdrawal     Ksh 6500",
+                        style = (TextStyle(
+                            color = EndBlue)
+                                )
+                    )
+                }
+            },
+            sheetPeekHeight = 100.dp
+        )
+        {
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                LowerPart()
+                MiddleText()
+            }
+        }
+    }
 
