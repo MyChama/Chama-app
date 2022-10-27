@@ -22,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -61,7 +63,13 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun Greeting(name: String) {
+    fun Greeting(name: String,
+                 modifier:Modifier = Modifier,
+                 navController: NavHostController = rememberNavController(),
+                 startDestination: String ="Contribute"
+
+                 ) {
+
 
         Row( modifier = Modifier
                 .fillMaxWidth(1f) )
@@ -352,7 +360,8 @@ fun LowerPart() {
         BottomSheetScaffold(
             sheetContent = {
                 Column(
-                    //horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+
                     modifier = Modifier
                         .background(
                             Taqo,
@@ -361,20 +370,32 @@ fun LowerPart() {
                         .fillMaxHeight(0.62f)
                         .fillMaxWidth()
                 ) {
-                    Text(modifier = Modifier.padding(start = 145.dp, top = 10.dp),
+                    Text(modifier = Modifier.padding( top = 10.dp),
                         text = "Transactions",
                         style = (TextStyle(
                             color = EndBlue,
                             fontSize = 17.sp,
 
                                 )  ))
-                    Text(modifier = Modifier.padding(start = 10.dp, top = 10.dp),
 
-                        text ="Withdrawal     Ksh 6500",
-                        style = (TextStyle(
-                            color = EndBlue)
-                                )
-                    )
+                    Row(modifier = Modifier
+                        .padding( horizontal = 15.dp)
+                        .fillMaxWidth(0.8f),
+                        horizontalArrangement = Arrangement.SpaceBetween,) {
+                        Text(text = "WITHDRAWAL",
+                            style = (TextStyle(
+                                color = EndBlue,)))
+                        Text(text = "KSH 7500",
+                            style = (TextStyle(
+                                color = EndBlue,)))
+
+
+
+
+
+
+
+                    }
                 }
             },
             sheetPeekHeight = 100.dp
