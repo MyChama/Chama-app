@@ -1,71 +1,38 @@
 package com.chamaapp
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.chamaapp.ui.theme.EndBlue
-import com.chamaapp.ui.theme.Taqo
 
 
-@ExperimentalMaterialApi
+
 @Composable
-fun BottomDrawer() {
-    val bottomSheet = rememberBottomSheetState(BottomSheetValue.Collapsed)
+fun ContributeScreen(){
+    Box(modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
 
-    BottomSheetScaffold(
-        sheetContent = {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-
-                modifier = Modifier
-                    .background(
-                        Taqo,
-                        shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
-                    )
-                    .fillMaxHeight(0.62f)
-                    .fillMaxWidth()
-            ) {
-                Text(modifier = Modifier.padding( top = 10.dp),
-                    text = "Choose Chama",
-                    style = (TextStyle(
-                        color = EndBlue,
-                        fontSize = 17.sp,
-
-                        )  ))
-
-                Row(modifier = Modifier
-                    .padding( horizontal = 15.dp)
-                    .fillMaxWidth(0.8f),
-                    horizontalArrangement = Arrangement.SpaceBetween,) {
-                    Text(text = "MAMA CHAMA",
-                        style = (TextStyle(
-                            color = EndBlue,)))
-
-
-
-
-
-
-
-
-                }
-            }
-        },
-        sheetPeekHeight = 100.dp
     ){
+        Text(text = "Contribute", color = EndBlue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp
+
+            )
+
+
 
     }
 
 }
+@Composable
+@Preview(showBackground = true)
+fun ContributionScreenPreview(){
+    ContributeScreen()
 
+}

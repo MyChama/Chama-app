@@ -5,12 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,25 +24,39 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
+    lateinit var navController: NavHostController
 
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ChamaAppTheme {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
 
                 ) {
-                   BottomNav()
-                    Greeting("Rachel")
+                    var showHomePage by rememberSaveable{mutableStateOf(true)}
+                    if (showHomePage)
+                    {
+                        BottomNav()
+                       GreetingScreen(name= "Rachel", onContinueClicked = {showHomePage=false})
+                       }
+                    else (ContributeScreen())
+                    }
+                   /* navController = rememberNavController()
+                    SetupNavGraph(navController = navController)
+                  BottomNav()
+                   GreetingScreen("Rachel",
+                       navController = rememberNavController())*/
 
                     Box {
                         Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
@@ -49,26 +65,23 @@ class MainActivity : ComponentActivity() {
 
                         Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
                             modifier = Modifier
-                                .padding(start = 320.dp, top = 20.dp)
-                                .size(30.dp),
+                                .padding(start = 320.dp, top = 24.dp)
+                                .size(20.dp),
                             colorFilter = ColorFilter
                                 .tint(color = EndBlue)
                         )
 
                     }
+
                 }
             }
         }
     }
 
-
+@ExperimentalMaterialApi
     @Composable
-    fun Greeting(name: String,
-                 modifier:Modifier = Modifier,
-                 navController: NavHostController = rememberNavController(),
-                 startDestination: String ="Contribute"
-
-                 ) {
+    fun GreetingScreen(name: String,
+    /*navController: NavController*/ onContinueClicked:()-> Unit) {
 
 
         Row( modifier = Modifier
@@ -148,8 +161,11 @@ Spacer(modifier = Modifier.height(15.dp))
                     )
                 )
             }
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = onContinueClicked,
                 modifier = Modifier
+                    /* .clickable {
+                        navController.navigate(route = Screen.Contribute.route)
+                    }*/
                     .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
 
@@ -168,9 +184,10 @@ Spacer(modifier = Modifier.height(15.dp))
             }
 
         }
-    }
 
     }
+
+
 
 
 @Composable
@@ -379,7 +396,7 @@ fun LowerPart() {
                                 )  ))
 
                     Row(modifier = Modifier
-                        .padding( horizontal = 15.dp)
+                        .padding(horizontal = 15.dp)
                         .fillMaxWidth(0.8f),
                         horizontalArrangement = Arrangement.SpaceBetween,) {
                         Text(text = "WITHDRAWAL",
@@ -388,12 +405,6 @@ fun LowerPart() {
                         Text(text = "KSH 7500",
                             style = (TextStyle(
                                 color = EndBlue,)))
-
-
-
-
-
-
 
                     }
                 }
