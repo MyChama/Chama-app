@@ -30,7 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
-    lateinit var navController: NavHostController
+    /*lateinit var navController: NavHostController*/
 
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
