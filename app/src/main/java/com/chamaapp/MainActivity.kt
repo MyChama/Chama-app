@@ -37,10 +37,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
 
                 ) {
-                   BottomNav()
-                    Greeting("Rachel")
+                  // BottomNav()
+                    //Greeting("Rachel")
 
-                    Box {
+                 /*   Box {
                         Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
                             tint = EndBlue, modifier = Modifier
                                 .padding(20.dp))
@@ -53,7 +53,8 @@ class MainActivity : ComponentActivity() {
                                 .tint(color = EndBlue)
                         )
 
-                    }
+                    }*/
+                    TransferPage()
                 }
             }
         }
