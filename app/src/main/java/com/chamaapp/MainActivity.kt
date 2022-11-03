@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -23,21 +24,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
+    /*lateinit var navController: NavHostController*/
 
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ChamaAppTheme {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
 
                 ) {
+
                     var showOnboarding by rememberSaveable{mutableStateOf(true)}
                     if (showOnboarding)
                         {
@@ -61,15 +68,16 @@ class MainActivity : ComponentActivity() {
                         else (TransferPage(goBackClicked = {showOnboarding=true}))
                     }
 
-
                 }
             }
         }
     }
 
-
+@ExperimentalMaterialApi
     @Composable
+
     fun Greeting(name: String,onTransferClicked: ()-> Unit) {
+
 
         Row( modifier = Modifier
                 .fillMaxWidth(1f) )
@@ -148,8 +156,12 @@ Spacer(modifier = Modifier.height(15.dp))
                     )
                 )
             }
+
             Button(onClick = {},
                 modifier = Modifier
+                    /* .clickable {
+                        navController.navigate(route = Screen.Contribute.route)
+                    }*/
                     .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
             )
@@ -167,7 +179,8 @@ Spacer(modifier = Modifier.height(15.dp))
             }
 
         }
-    }
+
+
 
 
 
@@ -359,7 +372,8 @@ fun LowerPart() {
         BottomSheetScaffold(
             sheetContent = {
                 Column(
-                    //horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+
                     modifier = Modifier
                         .background(
                             Taqo,
@@ -368,20 +382,26 @@ fun LowerPart() {
                         .fillMaxHeight(0.62f)
                         .fillMaxWidth()
                 ) {
-                    Text(modifier = Modifier.padding(start = 145.dp, top = 10.dp),
+                    Text(modifier = Modifier.padding( top = 10.dp),
                         text = "Transactions",
                         style = (TextStyle(
                             color = EndBlue,
                             fontSize = 17.sp,
 
                                 )  ))
-                    Text(modifier = Modifier.padding(start = 10.dp, top = 10.dp),
 
-                        text ="Withdrawal     Ksh 6500",
-                        style = (TextStyle(
-                            color = EndBlue)
-                                )
-                    )
+                    Row(modifier = Modifier
+                        .padding(horizontal = 15.dp)
+                        .fillMaxWidth(0.8f),
+                        horizontalArrangement = Arrangement.SpaceBetween,) {
+                        Text(text = "WITHDRAWAL",
+                            style = (TextStyle(
+                                color = EndBlue,)))
+                        Text(text = "KSH 7500",
+                            style = (TextStyle(
+                                color = EndBlue,)))
+
+                    }
                 }
             },
             sheetPeekHeight = 100.dp
