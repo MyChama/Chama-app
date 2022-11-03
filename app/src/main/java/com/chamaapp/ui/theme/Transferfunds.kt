@@ -18,7 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.chamaapp.R
 
 @Composable
-fun TransferPage() {
+fun TransferPage(goBackClicked:()->Unit)
+{
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -31,7 +32,7 @@ fun TransferPage() {
         )
         {
             Button(modifier= Modifier.size(50.dp),shape = CircleShape,
-                onClick = { /*TODO*/ })
+                onClick = goBackClicked)
             {
                 Image(painterResource(id = R.drawable.backicon), contentDescription ="Back",
                     colorFilter = ColorFilter.tint(Color.White),modifier=Modifier.size(70.dp))

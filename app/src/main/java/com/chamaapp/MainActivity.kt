@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,24 +38,30 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
 
                 ) {
-                  // BottomNav()
-                    //Greeting("Rachel")
+                    var showOnboarding by rememberSaveable{mutableStateOf(true)}
+                    if (showOnboarding)
+                        {
+                             BottomNav()
+                            Greeting("Rachel", onTransferClicked = {showOnboarding=false})
+                            Box {
+                                Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
+                                    tint = EndBlue, modifier = Modifier
+                                        .padding(20.dp))
 
-                 /*   Box {
-                        Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
-                            tint = EndBlue, modifier = Modifier
-                                .padding(20.dp))
+                                Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
+                                    modifier = Modifier
+                                        .padding(start = 320.dp, top = 20.dp)
+                                        .size(30.dp),
+                                    colorFilter = ColorFilter
+                                        .tint(color = EndBlue)
+                                )
 
-                        Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
-                            modifier = Modifier
-                                .padding(start = 320.dp, top = 20.dp)
-                                .size(30.dp),
-                            colorFilter = ColorFilter
-                                .tint(color = EndBlue)
-                        )
+                            }
+                        }
+                        else (TransferPage(goBackClicked = {showOnboarding=true}))
+                    }
 
-                    }*/
-                    TransferPage()
+
                 }
             }
         }
@@ -62,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun Greeting(name: String) {
+    fun Greeting(name: String,onTransferClicked: ()-> Unit) {
 
         Row( modifier = Modifier
                 .fillMaxWidth(1f) )
@@ -124,7 +131,7 @@ Spacer(modifier = Modifier.height(15.dp))
         )
         {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = onTransferClicked,
                 modifier = Modifier
                     .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
@@ -141,11 +148,10 @@ Spacer(modifier = Modifier.height(15.dp))
                     )
                 )
             }
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = {},
                 modifier = Modifier
                     .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
-
             )
 
             {
@@ -163,7 +169,7 @@ Spacer(modifier = Modifier.height(15.dp))
         }
     }
 
-    }
+
 
 
 @Composable
