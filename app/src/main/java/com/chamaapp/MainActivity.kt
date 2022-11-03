@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -23,6 +24,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.chamaapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -45,20 +49,6 @@ class MainActivity : ComponentActivity() {
                     {
                         BottomNav()
                        GreetingScreen(name= "Rachel", onContinueClicked = {showHomePage=false})
-                        Box {
-                            Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
-                                tint = EndBlue, modifier = Modifier
-                                    .padding(20.dp))
-
-                            Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
-                                modifier = Modifier
-                                    .padding(start = 320.dp, top = 24.dp)
-                                    .size(20.dp),
-                                colorFilter = ColorFilter
-                                    .tint(color = EndBlue)
-                            )
-
-                        }
                        }
                     else (ContributeScreen())
                     }
@@ -67,6 +57,22 @@ class MainActivity : ComponentActivity() {
                   BottomNav()
                    GreetingScreen("Rachel",
                        navController = rememberNavController())*/
+
+                    Box {
+                        Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
+                            tint = EndBlue, modifier = Modifier
+                                .padding(20.dp))
+
+                        Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
+                            modifier = Modifier
+                                .padding(start = 320.dp, top = 24.dp)
+                                .size(20.dp),
+                            colorFilter = ColorFilter
+                                .tint(color = EndBlue)
+                        )
+
+                    }
+
                 }
             }
         }
