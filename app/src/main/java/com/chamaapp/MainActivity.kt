@@ -44,28 +44,33 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
 
                 ) {
+                    var showHomePage by rememberSaveable{mutableStateOf(true)}
+                    if (showHomePage)
+                    {
+                        BottomNav()
+                       GreetingScreen(name= "Rachel", onContinueClicked = {showHomePage=false})
+                       }
+                    else (ContributeScreen())
+                    }
+                   /* navController = rememberNavController()
+                    SetupNavGraph(navController = navController)
+                  BottomNav()
+                   GreetingScreen("Rachel",
+                       navController = rememberNavController())*/
 
-                    var showOnboarding by rememberSaveable{mutableStateOf(true)}
-                    if (showOnboarding)
-                        {
-                             BottomNav()
-                            Greeting("Rachel", onTransferClicked = {showOnboarding=false})
-                            Box {
-                                Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
-                                    tint = EndBlue, modifier = Modifier
-                                        .padding(20.dp))
+                    Box {
+                        Icon(imageVector = Icons.Outlined.Menu, contentDescription ="menu",
+                            tint = EndBlue, modifier = Modifier
+                                .padding(20.dp))
 
-                                Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
-                                    modifier = Modifier
-                                        .padding(start = 320.dp, top = 20.dp)
-                                        .size(30.dp),
-                                    colorFilter = ColorFilter
-                                        .tint(color = EndBlue)
-                                )
+                        Image(painterResource(id = R.drawable.qrcode), contentDescription ="bar",
+                            modifier = Modifier
+                                .padding(start = 320.dp, top = 24.dp)
+                                .size(20.dp),
+                            colorFilter = ColorFilter
+                                .tint(color = EndBlue)
+                        )
 
-                            }
-                        }
-                        else (TransferPage(goBackClicked = {showOnboarding=true}))
                     }
 
                 }
@@ -75,8 +80,8 @@ class MainActivity : ComponentActivity() {
 
 @ExperimentalMaterialApi
     @Composable
-
-    fun Greeting(name: String,onTransferClicked: ()-> Unit) {
+    fun GreetingScreen(name: String,
+    /*navController: NavController*/ onContinueClicked:()-> Unit) {
 
 
         Row( modifier = Modifier
@@ -139,7 +144,7 @@ Spacer(modifier = Modifier.height(15.dp))
         )
         {
             Button(
-                onClick = onTransferClicked,
+                onClick = { /*TODO*/ },
                 modifier = Modifier
                     .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
@@ -156,14 +161,14 @@ Spacer(modifier = Modifier.height(15.dp))
                     )
                 )
             }
-
-            Button(onClick = {},
+            Button(onClick = onContinueClicked,
                 modifier = Modifier
                     /* .clickable {
                         navController.navigate(route = Screen.Contribute.route)
                     }*/
                     .padding(top = 175.dp)
                     .size(width = 160.dp, height = 50.dp)
+
             )
 
             {
@@ -180,7 +185,7 @@ Spacer(modifier = Modifier.height(15.dp))
 
         }
 
-
+    }
 
 
 
@@ -303,7 +308,7 @@ fun LowerPart() {
                 .width(160.dp)
                 .height(140.dp)
                 .background(color = Taqo, shape = RoundedCornerShape(10.dp))
-                .size(49.dp)
+                .size(50.dp)
 
 
         )
