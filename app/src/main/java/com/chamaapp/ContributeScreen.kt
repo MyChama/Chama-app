@@ -1,18 +1,16 @@
 package com.chamaapp
 
-import android.graphics.drawable.Icon
-import android.util.Log
-import android.widget.SearchView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,8 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,43 +34,10 @@ fun ContributeScreen() {
                 .padding(top = 30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "CONTRIBUTE", color = Color.Black,
-            fontSize = 20.sp)
+            Text(text = "CONTRIBUTE", color = EndBlue,
+            fontSize = 15.sp)
            SearchView()
-
-        }
-        Column(modifier = Modifier
-            .padding(top = 400.dp, start = 30.dp)
-            .fillMaxWidth()
-
-        ) {
-            Text(text = "JOIN A NEW CHAMA", fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier.padding(10.dp))
-            Text(text = "MURANGA MUMS")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "TURKANA WARRIORS")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "MAKUENI TITANS")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "EASTLEIGH SISTERS")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "PWANI SIMBAS")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "UON COMRADES")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "DAUGHTERS OF NGARA")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "WALIMU SACCO")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "DND GROUP")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "RIZIKI FAMILY")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "SIAYA SAILORS")
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = "KISUMU BOYS")
-
-
+            ChamaMpya()
         }
     }
     Column(
@@ -83,49 +46,70 @@ fun ContributeScreen() {
             .fillMaxHeight(0.3f)
             .fillMaxWidth())
     {
-        Row {
-            Icon(
-                painter = painterResource(id = R.drawable.numpad),
-                contentDescription = "ENTER CHAMA NUMBER", modifier = Modifier
-                    .size(45.dp)
-                    .padding(5.dp)
-            )
+        Row{
+            Box(modifier = Modifier
+                .size(50.dp)
+                .background(color = Taqo, shape = RoundedCornerShape(25.dp)),
+            contentAlignment = Alignment.Center)
+            {
+                Icon(
+                    painter = painterResource(id = R.drawable.phone), tint = EndBlue,
+                    contentDescription = "ENTER CHAMA NUMBER", modifier = Modifier
+                        .size(40.dp)
+                        .padding(5.dp)
+                )
+            }
             Text(
-                "ENTER CHAMA NUMBER",
+                "ENTER CHAMA NUMBER",color = EndBlue,
                 modifier = Modifier
-                    .padding(start = 1.dp, top = 10.dp)
+                    .padding(start = 10.dp, top = 15.dp)
             )
         }
-        Row {
+        Row (modifier=Modifier.padding(top=10.dp)){Box(modifier = Modifier
+            .size(50.dp)
+            .background(color = Taqo, shape = RoundedCornerShape(25.dp)),
+            contentAlignment = Alignment.Center)
+        {
             Icon(
-                painter = painterResource(id = R.drawable.addcircle),
+                painter = painterResource(id = R.drawable.newcontribution), tint = EndBlue,
                 contentDescription = "CONTRIBUTE HISTORY", modifier = Modifier
                     .size(45.dp)
                     .padding(5.dp)
-
-            )
-            Text(
-                "CONTRIBUTION HISTORY",
-                modifier = Modifier
-                    .padding(start = 1.dp, top = 15.dp)
+                    .clip(CircleShape)
+                    .background(Taqo)
             )
         }
-        Row {
-            Icon(
-                painter = painterResource(id = R.drawable.kalendar),
-                contentDescription = "ENTER CHAMA NUMBER",
-                modifier = Modifier
-                    // .padding(top = 15.dp)
-                    .size(45.dp)
-                    .padding(5.dp)
-
-            )
             Text(
-                "NEXT CONTRIBUTION",
+                "CONTRIBUTION HISTORY",color = EndBlue,
                 modifier = Modifier
-                    .padding(start = 1.dp, top = 15.dp)
+                    .padding(start = 10.dp, top = 15.dp)
             )
         }
+        Row (modifier=Modifier.padding(top=10.dp)){
+            Box(modifier = Modifier
+                .size(50.dp)
+                .background(color = Taqo, shape = RoundedCornerShape(25.dp)),
+                contentAlignment = Alignment.Center)
+            {
+                Icon(
+                    painter = painterResource(id = R.drawable.newkalendar), tint = EndBlue,
+                    contentDescription = "Next Contribution",
+                    modifier = Modifier
+                        // .padding(top = 15.dp)
+                        .size(45.dp)
+                        .padding(5.dp)
+                        .clip(CircleShape)
+                        .background(Taqo)
+                )
+            }
+            Text(
+                "NEXT CONTRIBUTION",color = EndBlue,
+                modifier = Modifier
+                    .padding(start = 10.dp, top = 15.dp)
+            )
+        }
+        Spacer(modifier = Modifier.padding(15.dp))
+
 
     }
 }
@@ -141,6 +125,7 @@ fun SearchView() {
             .clip(RoundedCornerShape(30.dp))
             .padding(start = 20.dp, top = 20.dp, end = 20.dp)
             .fillMaxWidth(),
+
 
 
 
@@ -169,16 +154,31 @@ fun SearchView() {
 
     }
 }
-
-
-
 @Composable
-@Preview(showBackground = true)
-fun ContributionScreenPreview(){
-    ContributeScreen()
+fun ChamaMpya() {
+    Column(
+        modifier = Modifier
+            .padding(top = 180.dp, start = 30.dp)
+            .fillMaxWidth()
+
+    ) {
+
+        Spacer(modifier = Modifier.padding(15.dp))
+        Text(text = "JOIN A NEW CHAMA", color = EndBlue, fontWeight = FontWeight.Bold)
+
+        Spacer(modifier = Modifier.padding(10.dp))
+
+
+
+        LazyColumn {
+            items(newChamasList)
+            { newList ->
+                NewChama(chamaScreen = newList)
+            }
+        }
+    }
+
 }
-
-
 
 
 
