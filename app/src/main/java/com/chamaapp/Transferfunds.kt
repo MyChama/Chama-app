@@ -96,20 +96,20 @@ fun TransferPage(goBackClicked:()->Unit)
 }
 @Composable
 fun MyNumPad( texts: List<String>,  weights: List <Float> /*callback: (text: String) -> Any*/) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
-            {
-                for (i in texts.indices) {
-                    MyButtons(
-                        text = texts[i],
-                        modifier = Modifier.weight(weights[i])
-                        /*callback= callback*/
-                    )
-                }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+
+            for (i in texts.indices) {
+                MyButtons(
+                    text = texts[i],
+                    modifier = Modifier.weight(weights[i])
+                    /*callback= callback*/
+                )
             }
-        }
+    }
+    }
 
 
 @Composable
